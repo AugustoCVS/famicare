@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         gray: {
+          default: '#4E4D53',
           100: '#F2F2F2',
           200: '#E5E5E5',
           300: '#D9D9D9',
@@ -24,6 +25,9 @@ module.exports = {
           100: '#749E50',
         },
         white: '#FFFFFF',
+        orange: {
+          default: '#F6931F'
+        }
       },
       extend: {},
     },
