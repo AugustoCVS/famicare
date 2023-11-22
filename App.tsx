@@ -9,7 +9,7 @@ function App(): JSX.Element {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} >
       <NativeBaseProvider>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <StackComponent />
       </NativeBaseProvider>
     </GestureHandlerRootView>
