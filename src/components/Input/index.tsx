@@ -20,7 +20,7 @@ export const Input: React.FC<T.InputProps> = ({ placeholder, value, onChangeText
                 _focus={{
                     bg: 'gray.200',
                     borderWidth: 2,
-                    borderColor: '#749E50',
+                    borderColor: '#F6931F',
                 }}
                 _invalid={{
                     borderWidth: 2,
