@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "famicare",
+    "slug": "famicare",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
