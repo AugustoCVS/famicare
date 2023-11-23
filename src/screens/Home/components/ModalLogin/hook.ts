@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useToast } from "native-base";
-import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import * as T from "./types";
 import * as U from "./utils";
-import { StackTypes } from "src/routes/stack";
 import { FIREBASE_AUTH } from "auth/FirebaseConfig";
+import AsyncStorage  from "@react-native-async-storage/async-storage";
 
 export const useModalLogin = () => {
-  const navigation = useNavigation<StackTypes>();
   const auth = FIREBASE_AUTH;
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -33,11 +31,16 @@ export const useModalLogin = () => {
     showToast({title: "Funcionalidade em desenvolvimento!", error: true})
   }
 
+  const saveUserTokenOnStorage = async (token: string): Promise<void> => {
+    await AsyncStorage.setItem("@userToken", token);
+  }
+
   const handleSignUp = async (FormData: T.useLoginProps): Promise<void> => {
     try {
       setLoading(true);
       await U.signInSchema.validate(FormData, { abortEarly: false });
-      await signInWithEmailAndPassword(auth, FormData.email, FormData.password);
+      const response = await signInWithEmailAndPassword(auth, FormData.email, FormData.password);
+      await saveUserTokenOnStorage(response.user.uid);
     } catch (error) {
      showToast({title: "E-mail ou senha inválidos", error: true});
      console.log(error)
