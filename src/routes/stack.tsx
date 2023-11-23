@@ -7,31 +7,26 @@ import {
 import Home from '../screens/Home';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from 'auth/FirebaseConfig';
+import AsyncStorage  from "@react-native-async-storage/async-storage";
+import { Dashboard } from 'src/screens/Dashboard';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
 export type StackNavigation = {
   Home: undefined;
   Dashboard: undefined;
-  Produtos: {
-    item: {
-      name: string;
-      description: string;
-      price: number;
-      quantity: number;
-    }
-  }
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 
 export default function StackComponent() {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user)
-    })
+      setUser(user);
+    });
   }, [])
 
   return (
@@ -39,6 +34,14 @@ export default function StackComponent() {
       <Stack.Navigator>
         {user ? (
           <>
+           <Stack.Screen 
+          name="Dashboard"  
+          options={{
+            title: '',
+            headerTransparent: true,
+            headerShown: false,
+          }} 
+          component={Dashboard} />
           </>
         ) : (
           <Stack.Screen 
