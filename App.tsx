@@ -1,12 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
-import { Text, View } from 'react-native';
+import StackComponent from './src/routes/stack';
+import { StatusBar } from 'expo-status-bar';
+import { NativeBaseProvider } from 'native-base';
 
-export default function App() {
+function App(): JSX.Element {
   return (
-    <View>
-      <Text>Hello World</Text>
-      <StatusBar style="light" />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }} >
+      <NativeBaseProvider>
+        <StatusBar style="dark" />
+        <StackComponent />
+      </NativeBaseProvider>
+    </GestureHandlerRootView>
   );
 }
+
+export default App;
+
