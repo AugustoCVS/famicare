@@ -1,19 +1,29 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import {
-  Fontisto,
-  MaterialIcons,
-  FontAwesome5,
-} from "@expo/vector-icons";
+import { Fontisto, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 import { useDashboard } from "./hook";
 import { CTA } from "src/components/CTA";
 import { DashboardHeader } from "./components/Header";
-import { ScrollView } from "native-base";
+import { FlatList, ScrollView } from "native-base";
 import { ModalEmergencyInfo } from "./components/ModalEmergencyInfo";
+
+import * as U from "./utils";
+import { AppointmentsSummary } from "./components/AppointmentsSummary";
 
 export const Dashboard: React.FC = () => {
   const { refs, actions } = useDashboard();
+
+  const renderAppointmentSummary = ({ item }) => {
+    return (
+      <AppointmentsSummary
+        day={item.day}
+        doctor={item.doctor}
+        hospital={item.hospital}
+        type={item.type}
+      />
+    );
+  };
 
   return (
     <>
@@ -27,7 +37,9 @@ export const Dashboard: React.FC = () => {
           <View className="w-full flex flex-col items-center justify-center">
             <CTA
               label="Histórico"
-              icon={<FontAwesome5 name="notes-medical" size={26} color="#F6931F" />}
+              icon={
+                <FontAwesome5 name="notes-medical" size={26} color="#F6931F" />
+              }
               onPress={actions.test}
             />
 
@@ -51,6 +63,20 @@ export const Dashboard: React.FC = () => {
               onPress={actions.test}
             />
           </View>
+        </View>
+
+        <View className="w-full">
+          <Text className="text-lg text-bold text-gray-default mb-4 pl-4">
+            Resumo dos agendamentos
+          </Text>
+
+          <FlatList
+            horizontal
+            data={U.UserMedicalAppointments}
+            keyExtractor={(item) => item.id.toString()}
+            showsHorizontalScrollIndicator={false}
+            renderItem={renderAppointmentSummary}
+          />
         </View>
       </ScrollView>
 
