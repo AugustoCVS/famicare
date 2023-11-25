@@ -13,6 +13,12 @@ export default function TabRoutes() {
         headerShown: false,
         tabBarActiveTintColor: "#FF872C",
         tabBarInactiveTintColor: "#4E4D53",
+        tabBarLabelStyle: {
+          fontSize: 14,
+        },
+        tabBarStyle: {
+          height: 88,
+        },
       }}
       initialRouteName="Dashboard"
     >
