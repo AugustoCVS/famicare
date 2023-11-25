@@ -1,11 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FIREBASE_AUTH } from "auth/FirebaseConfig";
+import { useNavigation } from "@react-navigation/native";
+import { StackTypes } from "src/routes/stack.routes";
 
 export const useDashboard = () => {
+  const navigation = useNavigation<StackTypes>();
 
   const handleLogout = async (): Promise<void> => {
     AsyncStorage.removeItem("@userToken");
-    await FIREBASE_AUTH.signOut();
+    navigation.navigate("Home");
   };
 
   return {

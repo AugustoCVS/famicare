@@ -6,11 +6,15 @@ import * as T from "./types";
 import * as U from "./utils";
 import { FIREBASE_AUTH } from "auth/FirebaseConfig";
 import AsyncStorage  from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { StackTypes } from "src/routes/stack.routes";
 
 export const useModalLogin = () => {
   const auth = FIREBASE_AUTH;
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation<StackTypes>();
 
   const toast = useToast();
 
@@ -41,6 +45,7 @@ export const useModalLogin = () => {
       await U.signInSchema.validate(FormData, { abortEarly: false });
       const response = await signInWithEmailAndPassword(auth, FormData.email, FormData.password);
       await saveUserTokenOnStorage(response.user.uid);
+      navigation.navigate("Dashboard");
     } catch (error) {
      showToast({title: "E-mail ou senha inválidos", error: true});
      console.log(error)
