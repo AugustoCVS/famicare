@@ -18,6 +18,7 @@ export default function TabRoutes() {
         },
         tabBarStyle: {
           height: 88,
+          backgroundColor: '#F9F8F8'
         },
       }}
       initialRouteName="Dashboard"
