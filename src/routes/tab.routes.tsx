@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5, Feather } from '@expo/vector-icons';
 
 import { Dashboard } from "src/screens/Dashboard";
-import { Profile } from "src/screens/Profile";
+import { Menu } from "src/screens/Menu";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ export default function TabComponent() {
             <Feather name="menu" size={20} color={color}  />
         ),
       }}
-      component={Profile} />
+      component={Menu} />
     </Tab.Navigator>
   );
 }
