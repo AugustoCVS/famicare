@@ -1,8 +1,14 @@
 import { View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "src/components/Button";
+import { ModalEmergencyInfo } from "../ModalEmergencyInfo";
+import { useDashboardHeader } from "./hook";
 
-export const DashboardHeader: React.FC = () => {
+import * as T from "./types";
+
+export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({ modalEmergencyInfoRef }) => {
+  const { headerActions } = useDashboardHeader({ modalEmergencyInfoRef });
+
   return (
     <LinearGradient
       colors={["#FFAB48", "#F6931F", "#603D14"]}
@@ -19,9 +25,11 @@ export const DashboardHeader: React.FC = () => {
           </Text>
         </Button>
 
-        <Button className="border border-gray-default w-2/4 rounded-lg flex items-center justify-center">
-          <Text className="text-md font-bold text-white-default">
-            Histórico
+        <Button className="border border-gray-default w-2/4 rounded-lg flex items-center justify-center"
+        onPress={headerActions.openModalEmergencyInfo}
+        >
+          <Text className="text-xs font-bold text-white-default uppercase">
+          Emergências
           </Text>
         </Button>
       </View>
