@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
-import Home from '../screens/Home';
-import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from 'auth/FirebaseConfig';
-import { Dashboard } from 'src/screens/Dashboard';
+} from "@react-navigation/native-stack";
+import Home from "../screens/Home";
+import TabRoutes from "./tab.routes";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,28 +16,29 @@ export type StackNavigation = {
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 
-export default function StackComponent() {
-
+export default function StackRoutes() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-           <Stack.Screen 
-          name="Dashboard"  
+      <Stack.Navigator
+      initialRouteName="Dashboard"
+      >
+        <Stack.Screen
+          name="Home"
           options={{
-            title: '',
+            title: "",
             headerTransparent: true,
             headerShown: false,
-          }} 
-          component={Dashboard} />
-          <Stack.Screen 
-          name="Home"  
+          }}
+          component={Home}
+        />
+
+        <Stack.Screen
+          name="Dashboard"
           options={{
-            title: '',
+            title: "",
             headerTransparent: true,
             headerShown: false,
-          }} 
-          component={Home} /> 
+          }}
+          component={TabRoutes}/>
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
