@@ -5,14 +5,13 @@ import { StackTypes } from "src/routes/stack.routes";
 export const useDashboard = () => {
   const navigation = useNavigation<StackTypes>();
 
-  const handleLogout = async (): Promise<void> => {
-    AsyncStorage.removeItem("@userToken");
-    navigation.navigate("Home");
-  };
+  const test = () => {
+    console.log("test");
+  }
 
   return {
     actions: {
-      handleLogout,
+      test,
     },
   };
 };
