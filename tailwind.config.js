@@ -24,9 +24,14 @@ module.exports = {
         green: {
           100: '#749E50',
         },
-        white: '#FFFFFF',
+        white: {
+          default: '#FFFFFF',
+          100: '#F9F8F8',
+        },
         orange: {
-          default: '#F6931F'
+          default: '#F6931F',
+          100: '#FFA500',
+          200: '#FFE2C0'
         }
       },
       extend: {},
