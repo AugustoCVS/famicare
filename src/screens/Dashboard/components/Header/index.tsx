@@ -6,30 +6,27 @@ import { useDashboardHeader } from "./hook";
 
 import * as T from "./types";
 
-export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({ modalEmergencyInfoRef }) => {
+export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({
+  modalEmergencyInfoRef,
+}) => {
   const { headerActions } = useDashboardHeader({ modalEmergencyInfoRef });
 
   return (
     <LinearGradient
-      colors={["#FFAB48", "#F6931F", "#603D14"]}
-      className="w-full h-[160px] flex items-start justify-center p-8 pt-16"
+      colors={["#FFAB48", "#F6931F", "#AF7A3C"]}
+      className="w-full h-[160px] flex items-center justify-center p-8 pt-16"
     >
-      <Text className="text-xl text-white-default font-bold text-center pt-4">
-        Olá, Bem vindo ao Famicare!
-      </Text>
+      <View className="flex flex-row items-center justify-between w-full h-10 gap-1 mt-1 gap-1">
+        <Text className="text-xl text-white-default font-bold text-center">
+          Olá, Familia Santana!
+        </Text>
 
-      <View className="flex flex-row w-full h-10 gap-1 mt-1">
-        <Button className="border border-gray-default w-2/4 rounded-lg flex items-center justify-center">
-          <Text className="text-md font-bold text-white-default">
-            Carteirinha
-          </Text>
-        </Button>
-
-        <Button className="border border-gray-default w-2/4 rounded-lg flex items-center justify-center"
-        onPress={headerActions.openModalEmergencyInfo}
+        <Button
+          className="border border-gray-default bg-white-default w-2/5 rounded-lg flex items-center justify-center h-3/4"
+          onPress={() => console.log("teste")}
         >
-          <Text className="text-xs font-bold text-white-default uppercase">
-          Emergências
+          <Text className="font-bold uppercase text-md text-orange-default">
+            Integrante
           </Text>
         </Button>
       </View>
