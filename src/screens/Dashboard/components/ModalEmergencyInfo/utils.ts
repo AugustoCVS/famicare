@@ -21,12 +21,17 @@ export const UserEmergencyInfo = [
   },
   {
     id: 5,
-    label: "Hospital de Preferência: ",
-    response: "Não especificado."
+    label: "Religião: ",
+    response: "Não se aplica"
   },
   {
     id: 6,
     label: "Contatos de Emergência: ",
-    response: "11952980373"
+    response: "Augusto - (11)95298-0373"
+  },
+  {
+    id: 7,
+    label: "Hospital de Preferência: ",
+    response: "Não especificado"
   }
 ];
