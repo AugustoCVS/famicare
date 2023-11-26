@@ -19,7 +19,7 @@ export const ModalEmergencyInfo: React.FC<T.ModalEmergencyInfoProps> = ({
       HeaderComponent={
         <View className="flex justify-center items-center mt-4">
           <Text className="text-gray-default font-bold text-2xl uppercase pt-1">
-            Informações Pessoais
+            Dados Emergencias
           </Text>
 
           <Pressable onPress={onClose} className="absolute right-4 top-1">
@@ -30,12 +30,12 @@ export const ModalEmergencyInfo: React.FC<T.ModalEmergencyInfoProps> = ({
     >
       <View className="w-full flex flex-col items-start p-4">
         {U.UserEmergencyInfo.map((item, index) => (
-          <View className="flex flex-row w-full justify-between">
+          <View className="flex flex-row w-full justify-between border-b-[1px] border-b-gray-default mt-4">
             <Text className="text-md text-gray-default font-bold text-center pt-4">
               {item.label}
             </Text>
 
-            <Text className="text-md text-gray-default font-bold text-center pt-4">
+            <Text className="text-md text-gray-default font-bold text-center pt-4 pl-4">
               {item.response}
             </Text>
           </View>
