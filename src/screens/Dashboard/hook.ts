@@ -12,12 +12,17 @@ export const useDashboard = () => {
     console.log('test')
   }
 
+  const handleOpenModalEmergencyInfo = () => {
+    modalEmergencyInfoRef.current?.open();
+  }
+
   return {
     refs: {
       modalEmergencyInfoRef,
     },
     actions: {
       test,
+      handleOpenModalEmergencyInfo,
     },
   };
 };
