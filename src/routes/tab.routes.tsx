@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome5, Feather, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5, Feather, MaterialIcons, AntDesign } from "@expo/vector-icons";
 
 import { Dashboard } from "src/screens/Dashboard";
 import { Menu } from "src/screens/Menu";
 import { Family } from "src/screens/Family";
 import { Appointments } from "src/screens/Appointments";
+import { SusCard } from "src/screens/SusCard";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +35,17 @@ export default function TabRoutes() {
           tabBarLabel: "Inicio",
         }}
         component={Dashboard}
+      />
+
+      <Tab.Screen
+        name="SusCard"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="idcard" size={20} color={color} />
+          ),
+          tabBarLabel: "Carteirinha",
+        }}
+        component={SusCard}
       />
 
       <Tab.Screen
