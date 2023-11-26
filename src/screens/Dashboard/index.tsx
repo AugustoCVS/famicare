@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { Fontisto, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import { Fontisto, MaterialIcons, FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import { useDashboard } from "./hook";
 import { CTA } from "src/components/CTA";
@@ -35,6 +35,16 @@ export const Dashboard: React.FC = () => {
 
         <View className="flex flex-col p-8">
           <View className="w-full flex flex-col items-center justify-center">
+
+            <CTA
+              label="Dados Emergenciais"
+              icon={
+                <Ionicons name="medical-sharp" size={26} color="#FFFFFF" />
+              }
+              onPress={actions.handleOpenModalEmergencyInfo}
+              isEmergency
+            />
+
             <CTA
               label="Histórico"
               icon={
