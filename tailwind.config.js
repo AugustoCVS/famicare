@@ -31,8 +31,12 @@ module.exports = {
         orange: {
           default: '#F6931F',
           100: '#FFA500',
-          200: '#FFE2C0'
-        }
+          200: '#FFE2C0',
+          300: '#FFEDD9',
+        },
+        red: {
+          default: '#FF0000',
+        },
       },
       extend: {},
     },
