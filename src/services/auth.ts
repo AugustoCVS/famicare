@@ -1,5 +1,5 @@
 import { api } from './api'
-import { RegisterReponse, RegisterRequest } from './interfaces/auth'
+import { LoginRequest, LoginResponse, RegisterReponse, RegisterRequest } from './interfaces/auth'
 
 export const AuthServices = {
     registerFamily: async({ name, email, password, confirm_password }: RegisterRequest) => {
@@ -12,4 +12,13 @@ export const AuthServices = {
 
         return res.data;
     },
+
+    loginFamily: async({ email, password }: LoginRequest) => {
+        const res = await api.post<LoginResponse>('/family/login', {
+            email,
+            password
+        })
+
+        return res.data;
+    }
 }
