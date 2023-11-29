@@ -50,7 +50,7 @@ export const Dashboard: React.FC = () => {
               icon={
                 <FontAwesome5 name="notes-medical" size={26} color="#F6931F" />
               }
-              onPress={actions.test}
+              onPress={actions.navigateToHealthHistoric}
             />
 
             <CTA

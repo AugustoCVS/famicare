@@ -12,6 +12,10 @@ export const useDashboard = () => {
     console.log('test')
   }
 
+  const navigateToHealthHistoric = () => {
+    navigation.navigate('HealthHistoric');
+  }
+
   const handleOpenModalEmergencyInfo = () => {
     modalEmergencyInfoRef.current?.open();
   }
@@ -23,6 +27,7 @@ export const useDashboard = () => {
     actions: {
       test,
       handleOpenModalEmergencyInfo,
+      navigateToHealthHistoric,
     },
   };
 };
