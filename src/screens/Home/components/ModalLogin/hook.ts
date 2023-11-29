@@ -56,7 +56,7 @@ export const useModalLogin = () => {
 
       await saveUserTokenOnStorage(response.token);
 
-      navigation.navigate("Dashboard");
+      navigation.navigate("TabDashboard");
     } catch (error) {
       showToast({ title: "E-mail ou senha inválidos", error: true });
       console.log(error);

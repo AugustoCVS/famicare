@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export type StackNavigation = {
   Home: undefined;
-  Dashboard: undefined;
+  TabDashboard: undefined;
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
@@ -19,7 +19,7 @@ export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 export default function StackRoutes() {
   return (
       <Stack.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Home"
       >
         <Stack.Screen
           name="Home"
@@ -32,7 +32,7 @@ export default function StackRoutes() {
         />
 
         <Stack.Screen
-          name="Dashboard"
+          name="TabDashboard"
           options={{
             title: "",
             headerTransparent: true,
