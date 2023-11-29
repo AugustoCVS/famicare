@@ -4,7 +4,7 @@ import { useToast } from "native-base";
 import * as T from "./types";
 import * as U from "./utils";
 import { FIREBASE_AUTH } from "auth/FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { AuthServices } from "src/services/auth";
 
 export const useModalRegister = ({modalRef}: T.ModalRegisterProps) => {
   const auth = FIREBASE_AUTH;
@@ -24,11 +24,16 @@ export const useModalRegister = ({modalRef}: T.ModalRegisterProps) => {
     try {
       setLoading(true);
       await U.signUpSchema.validate(FormData, { abortEarly: false });
-      await createUserWithEmailAndPassword(auth, FormData.email, FormData.password);
+      const response = await AuthServices.registerFamily({
+        name: FormData.name,
+        email: FormData.email,
+        password: FormData.password,
+        confirm_password: FormData.confirm_password,
+      });
       showToast({title: "Usuário cadastrado com sucesso!", error: false})
       modalRef.current?.close();
     } catch (error) {
-      showToast({title: "Erro ao cadastrar o usuário", error: true});
+      showToast({title: "Erro ao cadastrar o usuário!", error: true});
     } finally {
       setLoading(false);
     }

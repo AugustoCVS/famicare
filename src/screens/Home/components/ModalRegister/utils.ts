@@ -1,6 +1,8 @@
 import * as yup from "yup";
 
 export const signUpSchema = yup.object().shape({
+  name: yup.string().required("O nome é obrigatório"),
+
   email: yup
     .string()
     .email("Digite um e-mail válido")
@@ -15,13 +17,17 @@ export const signUpSchema = yup.object().shape({
       return passwordRegex.test(value);
     }),
 
-  confirmPassword: yup
+  confirm_password: yup
     .string()
     .oneOf([yup.ref("password"), null], "As senhas devem ser iguais")
     .required("A confirmação de senha é obrigatória"),
 });
 
 export const formFields = [
+  {
+    name: "name",
+    placeholder: "Nome",
+  },
   {
     name: "email",
     placeholder: "E-mail",
@@ -31,7 +37,7 @@ export const formFields = [
     placeholder: "Senha",
   },
   {
-    name: "confirmPassword",
+    name: "confirm_password",
     placeholder: "Confirmar Senha",
   },
 ];
