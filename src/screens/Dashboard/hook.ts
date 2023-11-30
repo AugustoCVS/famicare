@@ -18,14 +18,20 @@ export const useDashboard = () => {
     console.log('test')
   }
 
-  const showToast = ({message}: {message: string}) => {
+  const showToast = ({
+    title,
+    error,
+  }: {
+    title: string;
+    error: boolean;
+  }): void => {
     toast.show({
-      title: 'Funcionalidade em desenvolvimento!',
+      title: title,
       duration: 3000,
-      bgColor: 'red.500',
-      placement: 'top',
+      bgColor: error ? "red.500" : "green.500",
+      placement: "top",
     });
-  }
+  };
 
   const handleOpenModalLoginRelative = () => {
     modalLoginRelative.current?.open();
@@ -36,6 +42,10 @@ export const useDashboard = () => {
       navigation.navigate('HealthHistoric');
     } else {
       handleOpenModalLoginRelative();
+      showToast({
+        title: 'Você precisa estar logado para acessar o histórico de saúde',
+        error: true,
+      })
     }
   }
 
