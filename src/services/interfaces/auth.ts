@@ -19,3 +19,26 @@ export interface LoginRequest {
 export interface LoginResponse {
     token: string;
 }
+
+export interface registerRelativeRequest {
+    name: string;
+    email: string;
+    cpf: string;
+    password: string;
+    confirm_password: string;
+    id: string;
+    token: string;
+}
+
+export interface registerRelativeResponse {
+    id: string;
+    name: string;
+    email: string;
+    cpf: string;
+}
+export interface FetchRelativesResponse {
+    id: string;
+    name: string;
+    email: string;
+    cpf: string;
+}

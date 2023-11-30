@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         <Button className="bg-orange-default w-72 h-16 rounded-lg flex items-center justify-center text-center"
         onPress={actions.handleOpenModalLogin}
         >
-          <Text className="text-white text-lg">Login</Text>
+          <Text className="text-white-default text-lg">Login</Text>
         </Button>
 
         <Button className="bg-white w-72 h-16 rounded-lg flex items-center justify-center text-center border border-orange-default"
