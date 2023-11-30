@@ -3,7 +3,7 @@ export interface HealthHisoricRequest {
     token: string;
 }
 
-export interface HealthHistoricResponse {
+export interface FetchHealthHistoricResponse {
     id: string;
     diagnostic: string;
     treatment: string;
