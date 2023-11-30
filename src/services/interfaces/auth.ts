@@ -42,3 +42,17 @@ export interface FetchRelativesResponse {
     email: string;
     cpf: string;
 }
+
+export interface LoginRelativeRequest {
+    email: string;
+    password: string;
+    id: string;
+    token: string;
+}
+
+export interface LoginRelativeResponse {
+    id: number;
+    name: string;
+    cpf: string;
+    email: string;
+}

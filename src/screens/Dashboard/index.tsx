@@ -10,6 +10,7 @@ import { ModalEmergencyInfo } from "./components/ModalEmergencyInfo";
 
 import * as U from "./utils";
 import { AppointmentsSummary } from "./components/AppointmentsSummary";
+import { ModalLoginRelative } from "./components/ModalLoginRelative";
 
 export const Dashboard: React.FC = () => {
   const { refs, actions } = useDashboard();
@@ -31,7 +32,7 @@ export const Dashboard: React.FC = () => {
         className="flex bg-white-default h-full w-full"
         showsVerticalScrollIndicator={false}
       >
-        <DashboardHeader modalEmergencyInfoRef={refs.modalEmergencyInfoRef} />
+        <DashboardHeader modalLoginRelative={refs.modalLoginRelative} />
 
         <View className="flex flex-col p-8">
           <View className="w-full flex flex-col items-center justify-center">
@@ -91,6 +92,7 @@ export const Dashboard: React.FC = () => {
       </ScrollView>
 
       <ModalEmergencyInfo modalRef={refs.modalEmergencyInfoRef} />
+      <ModalLoginRelative modalRef={refs.modalLoginRelative} />
     </>
   );
 };

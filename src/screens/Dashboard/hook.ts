@@ -7,9 +7,14 @@ import { StackTypes } from "src/routes/stack.routes";
 export const useDashboard = () => {
   const navigation = useNavigation<StackTypes>();
   const modalEmergencyInfoRef = useRef<Modalize>(null);
+  const modalLoginRelative = useRef<Modalize>(null);
 
   const test = () => {
     console.log('test')
+  }
+
+  const handleOpenModalLoginRelative = () => {
+    modalLoginRelative.current?.open();
   }
 
   const navigateToHealthHistoric = () => {
@@ -23,11 +28,13 @@ export const useDashboard = () => {
   return {
     refs: {
       modalEmergencyInfoRef,
+      modalLoginRelative,
     },
     actions: {
       test,
       handleOpenModalEmergencyInfo,
       navigateToHealthHistoric,
+      handleOpenModalLoginRelative,
     },
   };
 };

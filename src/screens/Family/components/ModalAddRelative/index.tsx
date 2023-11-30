@@ -32,7 +32,7 @@ export const ModalAddRelative: React.FC<T.ModalAddRelativeProps> = ({ modalRef, 
       modalizeRef={modalRef}
       HeaderComponent={
         <View className="flex justify-center items-center mt-4">
-          <Text className="text-gray-default font-bold text-3xl">Cadastro</Text>
+          <Text className="text-gray-default font-bold text-3xl">Cadastro do Familiar</Text>
 
           <Pressable onPress={onClose} className="absolute right-4 top-1">
             <AntDesign name="close" size={30} color="black" />

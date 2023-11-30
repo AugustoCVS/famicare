@@ -1,5 +1,5 @@
 import { api } from './api'
-import { FetchRelativesResponse, LoginRequest, LoginResponse, RegisterReponse, RegisterRequest, registerRelativeRequest, registerRelativeResponse } from './interfaces/auth'
+import { FetchRelativesResponse, LoginRelativeRequest, LoginRelativeResponse, LoginRequest, LoginResponse, RegisterReponse, RegisterRequest, registerRelativeRequest, registerRelativeResponse } from './interfaces/auth'
 
 export const AuthServices = {
     registerFamily: async({ name, email, password, confirm_password }: RegisterRequest) => {
@@ -47,5 +47,18 @@ export const AuthServices = {
 
         return res.data;
     },
+
+    loginRelative: async({ email, password, id, token }: LoginRelativeRequest) => {
+        const res = await api.post<LoginRelativeResponse>(`/relative/${id}/login`, {
+            email,
+            password
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        return res.data;
+    }
 
 }
