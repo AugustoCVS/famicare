@@ -31,7 +31,6 @@ export const useModalAddRelative = ({modalRef, token}: T.ModalAddRelativeProps) 
         id: "13",
         token: token,
       });
-      console.log(response);
       showToast({title: "Familiar cadastrado com sucesso!", error: false})
       modalRef.current?.close();
     } catch (error) {

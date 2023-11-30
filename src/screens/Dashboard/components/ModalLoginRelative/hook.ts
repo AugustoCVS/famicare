@@ -11,7 +11,7 @@ export const useModalLoginRelative = ({
   modalRef,
 }: T.ModalLoginRelativeProps) => {
 
-  const { notifyDataChanged, getFamilyToken, token } = useDashboardContext();
+  const { notifyDataChanged, getFamilyToken, token, familyId } = useDashboardContext();
 
   const [loading, setLoading] = useState(false);
 
@@ -46,12 +46,14 @@ export const useModalLoginRelative = ({
     id,
     name,
   }: {
-    id: number;
+    id: string;
     name: string;
   }): Promise<void> => {
-    await AsyncStorage.setItem("@userRelativeId", id.toString());
+    await AsyncStorage.setItem("@userRelativeId", id);
     await AsyncStorage.setItem("@userName", name);
   };
+
+  console.log(familyId, token);
 
   const handleRelativeSignIng = async (
     FormData: T.useLoginRelativeProps
@@ -63,19 +65,18 @@ export const useModalLoginRelative = ({
       const response = await AuthServices.loginRelative({
         email: FormData.email,
         password: FormData.password,
-        id: "13",
+        id: familyId,
         token: token,
       });
 
-      await saveUserInfoOnStorage({ id: response.id, name: response.name });
+      await saveUserInfoOnStorage({ id: response.id.toString(), name: response.name });
 
       notifyDataChanged();
       
       modalRef.current?.close();
 
     } catch (error) {
-      showToast({ title: "E-mail ou senha inválidos", error: true });
-      console.log(error);
+      showToast({ title: "E-mail ou senha inválidos", error: true });;
     } finally {
       setLoading(false);
     }

@@ -130,15 +130,6 @@ export const DashboardProvider = ({ children }) => {
     getFamilyName();
   }, []);
 
-  console.log("DashboardContext", {
-    dataChanged,
-    relativeId,
-    relativeName,
-    familyName,
-    familyId,
-    token,
-  });
-
   const value: DashboardContextType = {
     dataChanged,
     notifyDataChanged,

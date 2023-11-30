@@ -15,8 +15,6 @@ export const useFamily = () => {
 
   const modalAddRelativeRef = useRef<Modalize>(null);
 
-  console.log(familyId)
-
   const handleFetchRelatives = useCallback(async () => {
     try {
       setLoading(true);
