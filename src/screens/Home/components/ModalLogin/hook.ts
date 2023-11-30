@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useToast } from "native-base";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import "core-js/stable/atob";
+import { jwtDecode } from "jwt-decode";
 
 import * as T from "./types";
 import * as U from "./utils";
@@ -8,8 +9,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "src/routes/stack.routes";
 import { AuthServices } from "src/services/auth";
+import { useDashboardContext } from "src/Context/Dashboard.context";
 
 export const useModalLogin = () => {
+  const { notifyDataChanged } = useDashboardContext();
+
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -40,8 +44,14 @@ export const useModalLogin = () => {
     showToast({ title: "Funcionalidade em desenvolvimento!", error: true });
   };
 
-  const saveUserTokenOnStorage = async (token: string): Promise<void> => {
+  const saveUserTokenOnStorage = async ({
+    token,
+    familyName,
+    familyId,
+  }: T.FamilyProps): Promise<void> => {
     await AsyncStorage.setItem("@userToken", token);
+    await AsyncStorage.setItem("@familyName", familyName);
+    await AsyncStorage.setItem("@familyId", familyId);
   };
 
   const handleSignUp = async (FormData: T.useLoginProps): Promise<void> => {
@@ -54,7 +64,15 @@ export const useModalLogin = () => {
         password: FormData.password,
       });
 
-      await saveUserTokenOnStorage(response.token);
+      const decoded = jwtDecode<T.JwtfamilyPayload>(response.token);
+
+      await saveUserTokenOnStorage({
+        token: response.token,
+        familyName: decoded.name,
+        familyId: decoded.id.toString(),
+      });
+
+      notifyDataChanged(); 
 
       navigation.navigate("TabDashboard");
     } catch (error) {

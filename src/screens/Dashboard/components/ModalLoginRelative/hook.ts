@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useToast } from "native-base";
 
 import * as T from "./types";
 import * as U from "./utils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthServices } from "src/services/auth";
+import { useDashboardContext } from "src/Context/Dashboard.context";
 
 export const useModalLoginRelative = ({
   modalRef,
 }: T.ModalLoginRelativeProps) => {
+
+  const { notifyDataChanged, getFamilyToken, token } = useDashboardContext();
+
   const [loading, setLoading] = useState(false);
 
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [token, setToken] = useState<string>("");
 
   const toast = useToast();
 
@@ -50,12 +53,6 @@ export const useModalLoginRelative = ({
     await AsyncStorage.setItem("@userName", name);
   };
 
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem("@userToken");
-    setToken(token);
-    return token;
-  };
-
   const handleRelativeSignIng = async (
     FormData: T.useLoginRelativeProps
   ): Promise<void> => {
@@ -71,9 +68,10 @@ export const useModalLoginRelative = ({
       });
 
       await saveUserInfoOnStorage({ id: response.id, name: response.name });
+
+      notifyDataChanged();
       
       modalRef.current?.close();
-      
 
     } catch (error) {
       showToast({ title: "E-mail ou senha inválidos", error: true });
@@ -84,7 +82,7 @@ export const useModalLoginRelative = ({
   };
 
   useEffect(() => {
-    getToken();
+    getFamilyToken();
   }, []);
 
   return {

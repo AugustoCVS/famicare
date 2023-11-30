@@ -8,4 +8,15 @@ export type ModalLoginProps = {
   modalRef: RefObject<Modalize>;
 }
 
+export type FamilyProps = {
+  familyName: string;
+  familyId: string;
+  token: string;
+}
+
+export type JwtfamilyPayload = {
+  id: string;
+  name: string;
+}
+
 export type useLoginProps = yup.InferType<typeof U.signInSchema>

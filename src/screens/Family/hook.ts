@@ -1,24 +1,20 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
+import { DashboardContext, useDashboardContext } from "src/Context/Dashboard.context";
 import { AuthServices } from "src/services/auth";
 
 import { FetchRelativesResponse } from "src/services/interfaces/auth";
 
 export const useFamily = () => {
+  const {getFamilyToken, token} = useDashboardContext();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshLoading, setRefreshLoading] = useState<boolean>(false);
 
   const [relatives, setRelatives] = useState<FetchRelativesResponse[]>([]);
-  const [token, setToken] = useState<string>("");
 
   const modalAddRelativeRef = useRef<Modalize>(null);
-
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem("@userToken");
-    setToken(token);
-    return token;
-  };
 
   const handleFetchRelatives = useCallback(async () => {
     try {
@@ -47,7 +43,7 @@ export const useFamily = () => {
 
   useEffect(() => {
     handleFetchRelatives();
-    getToken();
+    getFamilyToken();
   }, [token]);
 
   return {

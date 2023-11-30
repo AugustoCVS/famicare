@@ -1,36 +1,28 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as T from "./types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDashboardContext } from "src/Context/Dashboard.context";
 
 export const useDashboardHeader = ({ modalLoginRelative }: T.dashboardHeaderProps) => {
-  const [relativeId, setRelativeId] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
+
+  const { dataChanged, resetDataChanged, getRelativeName, getRelativeIdToken, getFamilyName, relativeId, relativeName, familyName, logoutRelative } = useDashboardContext();
 
   const openModalRelativeLogin = () => {
     modalLoginRelative.current?.open();
   };
 
-  const getUserIdToken = async (): Promise<string> => {
-    const id = await AsyncStorage.getItem("@userRelativeId");
-    setRelativeId(id);
-    return id;
-  }
-
-  const getRelativeName = async (): Promise<string> => {
-    const name = await AsyncStorage.getItem("@userName");
-    setUserName(name);
-    return name;
-  }
-
-  const logOut = async (): Promise<void> => {
-    await AsyncStorage.removeItem("@userRelativeId");
-    await AsyncStorage.removeItem("@userName");
+  const handleLogout = async (): Promise<void> => {
+    await logoutRelative();
   }
 
   useEffect(() => {
-    getUserIdToken();
-    getRelativeName();
-  }, [])
+    if (dataChanged) {
+      resetDataChanged();
+      getRelativeName();
+      getRelativeIdToken();
+      getFamilyName();
+    }
+  }, [dataChanged, resetDataChanged]);
 
   return {
     headerRefs: {
@@ -38,11 +30,12 @@ export const useDashboardHeader = ({ modalLoginRelative }: T.dashboardHeaderProp
     },
     headerActions: {
       openModalRelativeLogin,
-      logOut,
+      handleLogout,
     },
     headerStates: {
       relativeId,
-      userName,
+      relativeName,
+      familyName,
     },
   };
 };

@@ -18,12 +18,12 @@ export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({
     >
       <View className="flex flex-row items-center justify-between w-full h-10 gap-1 mt-1 gap-1">
         <Text className="text-xl text-white-default font-bold text-center">
-          {headerStates.relativeId ? "Olá, " + headerStates.userName : "Olá, Familia!"}
+          {headerStates.relativeId ? "Olá, " + headerStates.relativeName : `Olá, ${headerStates.familyName}!`}
         </Text>
 
         <Button
           className="border border-gray-default bg-white-default w-2/5 rounded-lg flex items-center justify-center h-3/4"
-          onPress={headerStates.relativeId ? headerActions.logOut : headerActions.openModalRelativeLogin}
+          onPress={headerStates.relativeId ? headerActions.handleLogout : headerActions.openModalRelativeLogin}
         >
           <Text className="font-bold uppercase text-md text-orange-default">
             {headerStates.relativeId ? "Sair" : "Integrante"}
