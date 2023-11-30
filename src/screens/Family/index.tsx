@@ -75,6 +75,7 @@ export const Family: React.FC = () => {
       <ModalAddRelative
         modalRef={refs.modalAddRelativeRef}
         token={states.token}
+        familyId={states.familyId}
       />
     </View>
   );

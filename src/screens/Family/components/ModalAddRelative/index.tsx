@@ -13,8 +13,8 @@ import * as T from "./types";
 import * as U from "./utils";
 import { Spinner } from "native-base";
 
-export const ModalAddRelative: React.FC<T.ModalAddRelativeProps> = ({ modalRef, token }) => {
-  const { states, actions } = useModalAddRelative({modalRef, token});
+export const ModalAddRelative: React.FC<T.ModalAddRelativeProps> = ({ modalRef, token, familyId }) => {
+  const { states, actions } = useModalAddRelative({modalRef, token, familyId});
   const {
     control,
     handleSubmit,

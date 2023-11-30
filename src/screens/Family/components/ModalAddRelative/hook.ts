@@ -5,7 +5,7 @@ import * as T from "./types";
 import * as U from "./utils";
 import { AuthServices } from "src/services/auth";
 
-export const useModalAddRelative = ({modalRef, token}: T.ModalAddRelativeProps) => {
+export const useModalAddRelative = ({modalRef, token, familyId}: T.ModalAddRelativeProps) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,7 @@ export const useModalAddRelative = ({modalRef, token}: T.ModalAddRelativeProps) 
         email: FormData.email,
         password: FormData.password,
         confirm_password: FormData.confirm_password,
-        id: "13",
+        id: familyId,
         token: token,
       });
       showToast({title: "Familiar cadastrado com sucesso!", error: false})

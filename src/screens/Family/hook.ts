@@ -53,7 +53,8 @@ export const useFamily = () => {
       relatives,
       refreshLoading,
       token,
-      familyName
+      familyName,
+      familyId,
     },
     actions: {
       refreshFamily,
