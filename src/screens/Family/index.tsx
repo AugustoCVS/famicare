@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { ModalAddRelative } from "./components/ModalAddRelative";
+import { Spinner } from "native-base";
 
 export const Family: React.FC = () => {
   const { refs, states, actions } = useFamily();
@@ -16,6 +17,33 @@ export const Family: React.FC = () => {
         onRefresh={actions.refreshFamily}
         tintColor={"#F6931F"}
       />
+    );
+  }
+
+  function renderFamilyMembers() {
+    return (
+      <View>
+        <ScrollView
+          className="flex flex-col h-full p-6"
+          refreshControl={renderRefreshControl()}
+        >
+          <Text className="text-xl text-gray-default font-bold">
+            Membros da Familía
+          </Text>
+          {states.relatives.map((relative) => (
+            <View
+              className="flex flex-col items-start justify-between w-full gap-1 mt-1 border border-gray-default rounded-lg p-4"
+              key={relative.id}
+            >
+              <Text className="text-lg text-gray-default font-bold">
+                {relative.name}
+              </Text>
+              <Text>CPF: {relative.cpf}</Text>
+              <Text>E-mail: {relative.email}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 
@@ -37,29 +65,17 @@ export const Family: React.FC = () => {
           </Button>
         </View>
       </LinearGradient>
-
-      <ScrollView
-        className="flex flex-col h-full p-6"
-        refreshControl={renderRefreshControl()}
-      >
-        <Text className="text-xl text-gray-default font-bold">
-          Membros da Familía
-        </Text>
-        {states.relatives.map((relative) => (
-          <View
-            className="flex flex-col items-start justify-between w-full gap-1 mt-1 border border-gray-default rounded-lg p-4"
-            key={relative.id}
-          >
-            <Text className="text-lg text-gray-default font-bold">
-              {relative.name}
-            </Text>
-            <Text>CPF: {relative.cpf}</Text>
-            <Text>E-mail: {relative.email}</Text>
-          </View>
-        ))}
-      </ScrollView>
-
-      <ModalAddRelative modalRef={refs.modalAddRelativeRef} token={states.token} />
+      {states.loading ? (
+        <View className="items-center justify-center h-full pb-40">
+          <Spinner color={"#F6931F"} />
+        </View>
+      ) : (
+        <>{renderFamilyMembers()}</>
+      )}
+      <ModalAddRelative
+        modalRef={refs.modalAddRelativeRef}
+        token={states.token}
+      />
     </View>
   );
 };

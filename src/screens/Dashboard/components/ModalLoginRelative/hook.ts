@@ -53,8 +53,6 @@ export const useModalLoginRelative = ({
     await AsyncStorage.setItem("@userName", name);
   };
 
-  console.log(familyId, token);
-
   const handleRelativeSignIng = async (
     FormData: T.useLoginRelativeProps
   ): Promise<void> => {
@@ -74,6 +72,8 @@ export const useModalLoginRelative = ({
       notifyDataChanged();
       
       modalRef.current?.close();
+
+      showToast({ title: "Login realizado com sucesso!", error: false });
 
     } catch (error) {
       showToast({ title: "E-mail ou senha inválidos", error: true });;
