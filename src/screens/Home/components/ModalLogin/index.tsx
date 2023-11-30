@@ -83,7 +83,7 @@ export const ModalLogin: React.FC<T.ModalLoginProps> = ({ modalRef }) => {
         className="bg-orange-default flex items-center justify-center py-4 rounded-xl mt-12 w-80"
         onPress={handleSubmit(actions.handleSignUp)}
       >
-        <Text className="text-white font-bold text-xl">
+        <Text className="text-white-default font-bold text-xl">
           {states.loading ? <Spinner color="white" size='sm' /> : "Continuar"}
         </Text>
       </Button>

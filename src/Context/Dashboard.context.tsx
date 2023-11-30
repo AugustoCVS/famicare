@@ -16,8 +16,8 @@ type DashboardContextType = {
   token: string;
   getFamilyToken: () => Promise<string>;
 
-  logoutFamily;
-  logoutRelative;
+  logoutFamily: () => Promise<void>;
+  logoutRelative: () => Promise<void>;
 };
 
 export const DashboardContext = createContext<DashboardContextType>({
@@ -61,32 +61,32 @@ export const DashboardProvider = ({ children }) => {
 
   const getRelativeIdToken = async (): Promise<string> => {
     const id = await AsyncStorage.getItem("@userRelativeId");
-    setRelativeId(id || "");
-    return id || "";
+    setRelativeId(id);
+    return id;
   };
 
   const getRelativeName = async (): Promise<string> => {
     const name = await AsyncStorage.getItem("@userName");
-    setRelativeName(name || "");
-    return name || "";
+    setRelativeName(name);
+    return name;
   };
 
   const getFamilyName = async (): Promise<string> => {
     const name = await AsyncStorage.getItem("@familyName");
-    setFamilyName(name || "");
-    return name || "";
+    setFamilyName(name);
+    return name;
   };
 
   const getFamilyId = async (): Promise<string> => {
-    const id = await AsyncStorage.getItem("@familyId");
-    setFamilyId(id || "");
-    return id || "";
+    const familyId = await AsyncStorage.getItem("@familyId");
+    setFamilyId(familyId);
+    return familyId;
   };
 
   const getFamilyToken = async (): Promise<string> => {
     const token = await AsyncStorage.getItem("@userToken");
-    setToken(token || "");
-    return token || "";
+    setToken(token);
+    return token;
   };
 
   const logoutFamily = async (): Promise<void> => {
@@ -123,11 +123,11 @@ export const DashboardProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    getFamilyId();
+    getFamilyToken();
     getRelativeIdToken();
     getRelativeName();
     getFamilyName();
-    getFamilyId();
-    getFamilyToken();
   }, []);
 
   console.log("DashboardContext", {

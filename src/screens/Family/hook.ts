@@ -1,13 +1,12 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
-import { DashboardContext, useDashboardContext } from "src/Context/Dashboard.context";
+import { useDashboardContext } from "src/Context/Dashboard.context";
 import { AuthServices } from "src/services/auth";
 
 import { FetchRelativesResponse } from "src/services/interfaces/auth";
 
 export const useFamily = () => {
-  const {getFamilyToken, token} = useDashboardContext();
+  const {getFamilyToken, token, getFamilyId, familyId, getFamilyName, familyName} = useDashboardContext();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [refreshLoading, setRefreshLoading] = useState<boolean>(false);
@@ -16,11 +15,13 @@ export const useFamily = () => {
 
   const modalAddRelativeRef = useRef<Modalize>(null);
 
+  console.log(familyId)
+
   const handleFetchRelatives = useCallback(async () => {
     try {
       setLoading(true);
       const response = await AuthServices.fetchRelatives({
-        id: "13",
+        id: familyId,
         token: token,
       });
       setRelatives(response);
@@ -44,6 +45,8 @@ export const useFamily = () => {
   useEffect(() => {
     handleFetchRelatives();
     getFamilyToken();
+    getFamilyId();
+    getFamilyName();
   }, [token]);
 
   return {
@@ -52,6 +55,7 @@ export const useFamily = () => {
       relatives,
       refreshLoading,
       token,
+      familyName
     },
     actions: {
       refreshFamily,

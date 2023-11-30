@@ -52,7 +52,7 @@ export const useModalLogin = () => {
     await AsyncStorage.setItem("@userToken", token);
     await AsyncStorage.setItem("@familyName", familyName);
     await AsyncStorage.setItem("@familyId", familyId);
-  };
+  };  
 
   const handleSignUp = async (FormData: T.useLoginProps): Promise<void> => {
     try {

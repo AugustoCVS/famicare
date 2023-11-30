@@ -72,7 +72,7 @@ export const ModalRegister: React.FC<T.ModalRegisterProps> = ({ modalRef }) => {
         className="bg-orange-default flex items-center justify-center py-4 rounded-xl mt-12 mb-6 w-80"
         onPress={handleSubmit(actions.handleSignUp)}
       >
-        <Text className="text-white font-bold text-xl">
+        <Text className="text-white-default font-bold text-xl">
           {states.loading ? <Spinner color="white" size='sm' /> : "Cadastrar"}
         </Text>
       </Button>

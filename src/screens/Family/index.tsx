@@ -27,7 +27,7 @@ export const Family: React.FC = () => {
       >
         <View className="flex flex-row items-center justify-between w-full h-10 gap-1 mt-1">
           <Text className="text-xl text-white-default font-bold text-center">
-            Olá, Familia!
+            {`Olá, ${states.familyName}!`}
           </Text>
 
           <Button className="pr-4" onPress={actions.handleOpenModalAddRelative}>
