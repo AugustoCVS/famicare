@@ -1,6 +1,6 @@
 export type AgendaSummaryProps = {
-  day: string;
+  date: string;
   type: string;
-  hospital: string;
+  local: string;
   doctor: string;
 };

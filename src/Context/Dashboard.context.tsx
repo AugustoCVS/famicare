@@ -18,6 +18,8 @@ type DashboardContextType = {
 
   logoutFamily: () => Promise<void>;
   logoutRelative: () => Promise<void>;
+
+  setRelativeName: (name: string) => void;
 };
 
 export const DashboardContext = createContext<DashboardContextType>({
@@ -37,6 +39,8 @@ export const DashboardContext = createContext<DashboardContextType>({
 
   logoutFamily: async () => {},
   logoutRelative: async () => {},
+
+  setRelativeName: (name: string) => {},
 });
 
 export const useDashboardContext = () => useContext(DashboardContext);
@@ -147,6 +151,8 @@ export const DashboardProvider = ({ children }) => {
 
     logoutFamily,
     logoutRelative,
+
+    setRelativeName
   };
 
   return (

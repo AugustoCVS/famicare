@@ -1,5 +1,5 @@
 import { api } from './api'
-import { FetchRelativesResponse, LoginRelativeRequest, LoginRelativeResponse, LoginRequest, LoginResponse, RegisterReponse, RegisterRequest, registerRelativeRequest, registerRelativeResponse } from './interfaces/auth'
+import { FetchRelativeByIdResponse, FetchRelativeRequest, FetchRelativesResponse, LoginRelativeRequest, LoginRelativeResponse, LoginRequest, LoginResponse, RegisterReponse, RegisterRequest, UpdateRelativeRequest, registerRelativeRequest, registerRelativeResponse } from './interfaces/auth'
 
 export const AuthServices = {
     registerFamily: async({ name, email, password, confirm_password }: RegisterRequest) => {
@@ -59,6 +59,29 @@ export const AuthServices = {
         })
 
         return res.data;
-    }
+    },
 
+    fetchRelativeById: async({ familyId, relativeId, token }: FetchRelativeRequest) => {
+        const res = await api.get<FetchRelativeByIdResponse>(`/relative/${familyId}/${relativeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        return res.data;
+    },
+
+    updateRelative: async({ name, email, cpf, relativeId, familyId, token }: UpdateRelativeRequest) => {
+        const res = await api.put<registerRelativeResponse>(`/relative/${familyId}/${relativeId}`, {
+            name,
+            email,
+            cpf,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        return res.data;
+    },
 }
