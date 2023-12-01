@@ -57,7 +57,7 @@ export const Dashboard: React.FC = () => {
             <CTA
               label="Consultas"
               icon={<Fontisto name="doctor" size={26} color="#F6931F" />}
-              onPress={actions.test}
+              onPress={actions.navigateToCommitments}
             />
 
             <CTA
