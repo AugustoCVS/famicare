@@ -46,7 +46,12 @@ O FamiCare representa uma mudança significativa na forma como as informações 
 -> Instruções para inicializar o projeto: 
 
 1 - Inicialize o backend seguindo as intruções 
+
 2 - Baixe o projeto front-end mobile e inicialize na sua IDE de preferência
+
 3 - Abra o terminal na pasta do projeto e de um yarn para instalar todas as dependências
+
 4 - De um yarn android ou yarn ios (se estiver em um Macbook) para baixar o app no emulador 
+
 5 - De um yarn start
+
