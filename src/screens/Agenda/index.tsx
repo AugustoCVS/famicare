@@ -3,9 +3,11 @@ import { RefreshControl, Text, View } from "react-native";
 import { ScrollView, Spinner } from "native-base";
 import { useAgenda } from "./hook";
 import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Button } from "src/components/Button";
+import { ModalLoginRelative } from "src/screens/Dashboard/components/ModalLoginRelative";
 
 export const Agenda: React.FC = () => {
-  const { states, actions } = useAgenda();
+  const { refs, states, actions } = useAgenda();
 
   function renderRefreshControl() {
     return (
@@ -25,7 +27,9 @@ export const Agenda: React.FC = () => {
       >
         <View className="flex flex-row items-center justify-between w-full h-10 gap-1 mt-1">
           <Text className="text-xl text-white-default font-bold text-center">
-            {`Olá, ${states.relativeName}!`}
+            {states.relativeName
+              ? `Olá, ${states.relativeName}!`
+              : `Olá, ${states.familyName}!`}
           </Text>
         </View>
       </LinearGradient>
@@ -39,9 +43,7 @@ export const Agenda: React.FC = () => {
         refreshControl={renderRefreshControl()}
         showsVerticalScrollIndicator={false}
       >
-        <Text className="text-xl text-gray-default font-bold">
-          Consultas
-        </Text>
+        <Text className="text-xl text-gray-default font-bold">Consultas</Text>
 
         {states.agenda.map((agenda) => {
           return (
@@ -103,13 +105,35 @@ export const Agenda: React.FC = () => {
     <View className="flex flex-col h-full bg-white-default">
       {renderHeader()}
 
-      {states.loading ? (
-        <View className="items-center justify-center h-full pb-40">
-          <Spinner color={"#F6931F"} />
-        </View>
+      {states.relativeId ? (
+        states.loading ? (
+          <View className="items-center justify-center h-full pb-40">
+            <Spinner color={"#F6931F"} />
+          </View>
+        ) : (
+          <>{renderPrescriptions()}</>
+        )
       ) : (
-        <>{renderPrescriptions()}</>
+        <View className="flex flex-col items-center justify-between mt-10 p-8">
+          <Text className="text-xl font-bold text-gray-default">
+            Para acessar a agenda, você precisa estar logado na conta de um
+            familiar.
+          </Text>
+
+          <View className="h-24 mt-40">
+          <Button
+            className="flex flex-row items-center justify-center bg-white-100 w-[220px] flex-1 mx-4 mb-8 p-4 rounded-lg border border-orange-default"
+            onPress={actions.handleOpenModalRelative}
+          >
+            <Text className="text-lg text-bold text-gray-default">
+              Acesse sua conta
+            </Text>
+          </Button>
+            </View>
+        </View>
       )}
+
+      <ModalLoginRelative modalRef={refs.modalLoginRelativeRef} />
     </View>
   );
 };
