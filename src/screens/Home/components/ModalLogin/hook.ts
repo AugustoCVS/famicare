@@ -76,6 +76,7 @@ export const useModalLogin = () => {
 
       navigation.navigate("TabDashboard");
     } catch (error) {
+      console.log(error);
       showToast({ title: "E-mail ou senha inválidos", error: true });
     } finally {
       setLoading(false);
