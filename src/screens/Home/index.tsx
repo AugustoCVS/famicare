@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
+import FamiCareIcon from 'src/assets/svg/famicare.svg';
+
 import {Button} from 'src/components/Button';
 import { useHome } from './hook';
 import { ModalLogin } from './components/ModalLogin';
@@ -12,8 +14,8 @@ const Home: React.FC = () => {
   return (
    <>
     <View className="bg-white flex flex-col items-center justify-center w-full h-full">
-      <View className="w-full flex items-center justify-center flex-row gap-4 mb-40 bg-gray-600">
-        
+      <View className="w-full flex justify-center flex-row gap-4 mb-40">
+        <FamiCareIcon width={200} height={200} />
       </View>
 
       <View className="flex flex-col gap-4">
