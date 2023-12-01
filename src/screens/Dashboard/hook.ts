@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useToast } from "native-base";
 import { useRef } from "react";
@@ -13,10 +12,6 @@ export const useDashboard = () => {
   const navigation = useNavigation<StackTypes>();
   const modalEmergencyInfoRef = useRef<Modalize>(null);
   const modalLoginRelative = useRef<Modalize>(null);
-
-  const test = () => {
-    console.log('test')
-  }
 
   const showToast = ({
     title,
@@ -35,47 +30,59 @@ export const useDashboard = () => {
 
   const handleOpenModalLoginRelative = () => {
     modalLoginRelative.current?.open();
-  }
+  };
 
   const navigateToHealthHistoric = () => {
-    if(relativeId) {
-      navigation.navigate('HealthHistoric');
+    if (relativeId) {
+      navigation.navigate("HealthHistoric");
     } else {
       handleOpenModalLoginRelative();
       showToast({
-        title: 'Você precisa estar logado para acessar o histórico de saúde',
+        title: "Você precisa estar logado para acessar o histórico de saúde",
         error: true,
-      })
+      });
     }
-  }
+  };
 
   const navigateToAppointments = () => {
-    if(relativeId) {
-      navigation.navigate('Appointments');
+    if (relativeId) {
+      navigation.navigate("Appointments");
     } else {
       handleOpenModalLoginRelative();
       showToast({
-        title: 'Você precisa estar logado para acessar o histórico de saúde',
+        title: "Você precisa estar logado para acessar o histórico de saúde",
         error: true,
-      })
+      });
     }
-  }
+  };
+
+  const navigateToPrescriptions = () => {
+    if (relativeId) {
+      navigation.navigate("Prescriptions");
+    } else {
+      handleOpenModalLoginRelative();
+      showToast({
+        title: "Você precisa estar logado para acessar o histórico de saúde",
+        error: true,
+      });
+    }
+  };
 
   const navigateToExams = () => {
-    if(relativeId) {
-      navigation.navigate('Exams');
+    if (relativeId) {
+      navigation.navigate("Exams");
     } else {
       handleOpenModalLoginRelative();
       showToast({
-        title: 'Você precisa estar logado para acessar o histórico de saúde',
+        title: "Você precisa estar logado para acessar o histórico de saúde",
         error: true,
-      })
+      });
     }
-  }
+  };
 
   const handleOpenModalEmergencyInfo = () => {
     modalEmergencyInfoRef.current?.open();
-  }
+  };
 
   return {
     refs: {
@@ -83,12 +90,12 @@ export const useDashboard = () => {
       modalLoginRelative,
     },
     actions: {
-      test,
       handleOpenModalEmergencyInfo,
       navigateToHealthHistoric,
       handleOpenModalLoginRelative,
       navigateToAppointments,
       navigateToExams,
+      navigateToPrescriptions,
     },
   };
 };

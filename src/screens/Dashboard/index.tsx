@@ -71,7 +71,7 @@ export const Dashboard: React.FC = () => {
               icon={
                 <FontAwesome5 name="laptop-medical" size={22} color="#F6931F" />
               }
-              onPress={actions.test}
+              onPress={actions.navigateToPrescriptions}
             />
           </View>
         </View>
