@@ -77,6 +77,7 @@ export const useMenu = () => {
       relative,
       loading,
       updateLoading,
+      relativeId,
     },
     actions: {
       handleLogout,

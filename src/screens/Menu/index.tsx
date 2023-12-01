@@ -86,7 +86,7 @@ export const Menu: React.FC = () => {
     <View className="flex items-center justify-between h-full p-8">
       {renderFamilyProfile()}
 
-      {states.relative && renderRelative()}
+      {states.relativeId && renderRelative()}
 
       <Button
         className="bg-orange-default flex items-center justify-center py-4 rounded-xl mt-12 w-80"
