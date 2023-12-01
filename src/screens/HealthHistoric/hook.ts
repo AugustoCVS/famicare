@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 import { useDashboardContext } from "src/Context/Dashboard.context";
 import { HealthHistoricServices } from "src/services/healthHistoric";
