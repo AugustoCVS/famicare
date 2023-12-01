@@ -7,6 +7,7 @@ import {
 import Home from "../screens/Home";
 import TabRoutes from "./tab.routes";
 import { HealthHistoric } from "src/screens/HealthHistoric";
+import { Commitments } from "src/screens/Commitments";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ export type StackNavigation = {
   Home: undefined;
   TabDashboard: undefined;
   HealthHistoric: undefined;
+  Commitments: undefined;
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
@@ -49,6 +51,16 @@ export default function StackRoutes() {
           headerShown: true,
         }}
         component={HealthHistoric}
+      />
+
+      <Stack.Screen
+        name="Commitments"
+        options={{
+          title: "Consultas",
+          headerTransparent: false,
+          headerShown: true,
+        }}
+        component={Commitments}
       />
     </Stack.Navigator>
   );
