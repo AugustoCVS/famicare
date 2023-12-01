@@ -1,13 +1,20 @@
 import { useNavigation } from "@react-navigation/native";
 import { useToast } from "native-base";
-import { useRef } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { Modalize } from "react-native-modalize";
 import { useDashboardContext } from "src/Context/Dashboard.context";
 import { StackTypes } from "src/routes/stack.routes";
 
+import { AgendaServices } from "src/services/agenda";
+import { AgendaResponse } from "src/services/interfaces/agenda";
+
 export const useDashboard = () => {
   const toast = useToast();
-  const { relativeId } = useDashboardContext();
+  const { relativeId, token } = useDashboardContext();
+
+  const [agenda, setAgenda] = useState<AgendaResponse[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [refreshLoading, setRefreshLoading] = useState<boolean>(false);
 
   const navigation = useNavigation<StackTypes>();
   const modalEmergencyInfoRef = useRef<Modalize>(null);
@@ -84,7 +91,41 @@ export const useDashboard = () => {
     modalEmergencyInfoRef.current?.open();
   };
 
+  const handleFetchAgenda = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const response = await AgendaServices.fetchAgenda({
+        relativeId: relativeId,
+        token: token,
+      })
+
+      setAgenda(response);
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [relativeId]);
+
+  useEffect(() => {
+    handleFetchAgenda();
+  }, [relativeId]);
+
+  const renderRefresh = () => {
+    setRefreshLoading(true);
+    handleFetchAgenda();
+    setRefreshLoading(false);
+  }
+
   return {
+    states: {
+      agenda,
+      loading,
+      relativeId,
+      refreshLoading,
+    },
     refs: {
       modalEmergencyInfoRef,
       modalLoginRelative,
@@ -96,6 +137,7 @@ export const useDashboard = () => {
       navigateToAppointments,
       navigateToExams,
       navigateToPrescriptions,
+      renderRefresh,
     },
   };
 };
