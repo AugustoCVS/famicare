@@ -26,6 +26,7 @@ export const Family: React.FC = () => {
         <ScrollView
           className="flex flex-col h-full p-6"
           refreshControl={renderRefreshControl()}
+          showsVerticalScrollIndicator={false}
         >
           <Text className="text-xl text-gray-default font-bold">
             Membros da Familía
