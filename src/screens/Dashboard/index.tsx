@@ -9,15 +9,15 @@ import { FlatList, ScrollView } from "native-base";
 import { ModalEmergencyInfo } from "./components/ModalEmergencyInfo";
 
 import * as U from "./utils";
-import { AppointmentsSummary } from "./components/AppointmentsSummary";
+import { AgendaSummary } from "./components/AgendaSummary";
 import { ModalLoginRelative } from "./components/ModalLoginRelative";
 
 export const Dashboard: React.FC = () => {
   const { refs, actions } = useDashboard();
 
-  const renderAppointmentSummary = ({ item }) => {
+  const renderAgendaummary = ({ item }) => {
     return (
-      <AppointmentsSummary
+      <AgendaSummary
         day={item.day}
         doctor={item.doctor}
         hospital={item.hospital}
@@ -57,7 +57,7 @@ export const Dashboard: React.FC = () => {
             <CTA
               label="Consultas"
               icon={<Fontisto name="doctor" size={26} color="#F6931F" />}
-              onPress={actions.navigateToCommitments}
+              onPress={actions.navigateToAppointments}
             />
 
             <CTA
@@ -83,10 +83,10 @@ export const Dashboard: React.FC = () => {
 
           <FlatList
             horizontal
-            data={U.UserMedicalAppointments}
+            data={U.UserMedicalAgenda}
             keyExtractor={(item) => item.id.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={renderAppointmentSummary}
+            renderItem={renderAgendaummary}
           />
         </View>
       </ScrollView>

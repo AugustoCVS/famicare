@@ -49,9 +49,9 @@ export const useDashboard = () => {
     }
   }
 
-  const navigateToCommitments = () => {
+  const navigateToAppointments = () => {
     if(relativeId) {
-      navigation.navigate('Commitments');
+      navigation.navigate('Appointments');
     } else {
       handleOpenModalLoginRelative();
       showToast({
@@ -75,7 +75,7 @@ export const useDashboard = () => {
       handleOpenModalEmergencyInfo,
       navigateToHealthHistoric,
       handleOpenModalLoginRelative,
-      navigateToCommitments
+      navigateToAppointments
     },
   };
 };

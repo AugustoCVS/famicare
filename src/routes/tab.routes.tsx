@@ -4,8 +4,8 @@ import { FontAwesome5, Feather, MaterialIcons, AntDesign } from "@expo/vector-ic
 import { Dashboard } from "src/screens/Dashboard";
 import { Menu } from "src/screens/Menu";
 import { Family } from "src/screens/Family";
-import { Appointments } from "src/screens/Appointments";
 import { SusCard } from "src/screens/SusCard";
+import { Agenda } from "src/screens/Agenda";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,14 +49,14 @@ export default function TabRoutes() {
       />
 
       <Tab.Screen
-        name="Appointments"
+        name="Agenda"
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="book-medical" size={20} color={color} />
           ),
           tabBarLabel: "Agenda",
         }}
-        component={Appointments}
+        component={Agenda}
       />
 
       <Tab.Screen

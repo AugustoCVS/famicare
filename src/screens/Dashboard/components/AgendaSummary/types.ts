@@ -1,4 +1,4 @@
-export type AppointmentsSummaryProps = {
+export type AgendaSummaryProps = {
   day: string;
   type: string;
   hospital: string;

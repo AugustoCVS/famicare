@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as T from "./types";
 import { View, Text } from "react-native";
 
-export const AppointmentsSummary: React.FC<T.AppointmentsSummaryProps> = ({
+export const AgendaSummary: React.FC<T.AgendaSummaryProps> = ({
   day,
   doctor,
   hospital,

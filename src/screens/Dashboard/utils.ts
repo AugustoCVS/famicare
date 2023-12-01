@@ -1,4 +1,4 @@
-export const UserMedicalAppointments = [
+export const UserMedicalAgenda = [
   {
     id: '1',
     day: "30/11/2023",
