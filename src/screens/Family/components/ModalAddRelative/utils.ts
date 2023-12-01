@@ -1,7 +1,9 @@
 import * as yup from "yup";
 
-export const signUpSchema = yup.object().shape({
+export const addRelativeSchema = yup.object().shape({
   name: yup.string().required("O nome é obrigatório"),
+
+  cpf: yup.string().required("O CPF é obrigatório"),
 
   email: yup
     .string()
@@ -27,6 +29,10 @@ export const formFields = [
   {
     name: "name",
     placeholder: "Nome",
+  },
+  {
+    name: "cpf",
+    placeholder: "CPF",
   },
   {
     name: "email",

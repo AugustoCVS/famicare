@@ -9,14 +9,15 @@ import { FlatList, ScrollView } from "native-base";
 import { ModalEmergencyInfo } from "./components/ModalEmergencyInfo";
 
 import * as U from "./utils";
-import { AppointmentsSummary } from "./components/AppointmentsSummary";
+import { AgendaSummary } from "./components/AgendaSummary";
+import { ModalLoginRelative } from "./components/ModalLoginRelative";
 
 export const Dashboard: React.FC = () => {
   const { refs, actions } = useDashboard();
 
-  const renderAppointmentSummary = ({ item }) => {
+  const renderAgendaummary = ({ item }) => {
     return (
-      <AppointmentsSummary
+      <AgendaSummary
         day={item.day}
         doctor={item.doctor}
         hospital={item.hospital}
@@ -31,7 +32,7 @@ export const Dashboard: React.FC = () => {
         className="flex bg-white-default h-full w-full"
         showsVerticalScrollIndicator={false}
       >
-        <DashboardHeader modalEmergencyInfoRef={refs.modalEmergencyInfoRef} />
+        <DashboardHeader modalLoginRelative={refs.modalLoginRelative} />
 
         <View className="flex flex-col p-8">
           <View className="w-full flex flex-col items-center justify-center">
@@ -50,13 +51,13 @@ export const Dashboard: React.FC = () => {
               icon={
                 <FontAwesome5 name="notes-medical" size={26} color="#F6931F" />
               }
-              onPress={actions.test}
+              onPress={actions.navigateToHealthHistoric}
             />
 
             <CTA
               label="Consultas"
               icon={<Fontisto name="doctor" size={26} color="#F6931F" />}
-              onPress={actions.test}
+              onPress={actions.navigateToAppointments}
             />
 
             <CTA
@@ -82,15 +83,16 @@ export const Dashboard: React.FC = () => {
 
           <FlatList
             horizontal
-            data={U.UserMedicalAppointments}
+            data={U.UserMedicalAgenda}
             keyExtractor={(item) => item.id.toString()}
             showsHorizontalScrollIndicator={false}
-            renderItem={renderAppointmentSummary}
+            renderItem={renderAgendaummary}
           />
         </View>
       </ScrollView>
 
       <ModalEmergencyInfo modalRef={refs.modalEmergencyInfoRef} />
+      <ModalLoginRelative modalRef={refs.modalLoginRelative} />
     </>
   );
 };

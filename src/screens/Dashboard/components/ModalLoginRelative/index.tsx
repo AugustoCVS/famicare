@@ -8,18 +8,20 @@ import * as U from "./utils";
 import { Modal } from "src/components/Modais/Gerenic";
 import { Pressable, View, Text } from "react-native";
 import { Button } from "src/components/Button";
-import { useModalLogin } from "./hook";
+import { useModalLoginRelative } from "./hook";
 import { Input } from "src/components/Input";
 import { Spinner } from "native-base";
 
-export const ModalLogin: React.FC<T.ModalLoginProps> = ({ modalRef }) => {
-  const { states, actions } = useModalLogin();
+export const ModalLoginRelative: React.FC<T.ModalLoginRelativeProps> = ({
+  modalRef,
+}) => {
+  const { states, actions } = useModalLoginRelative({ modalRef });
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<T.useLoginProps>({
-    resolver: yupResolver(U.signInSchema)
+  } = useForm<T.useLoginRelativeProps>({
+    resolver: yupResolver(U.signInRelativeSchema),
   });
 
   const onClose = () => {
@@ -31,7 +33,7 @@ export const ModalLogin: React.FC<T.ModalLoginProps> = ({ modalRef }) => {
       modalizeRef={modalRef}
       HeaderComponent={
         <View className="flex justify-center items-center mt-4">
-          <Text className="text-gray-default font-bold text-3xl">Login</Text>
+          <Text className="text-gray-default font-bold text-3xl">Login do Familiar</Text>
 
           <Pressable onPress={onClose} className="absolute right-4 top-1">
             <AntDesign name="close" size={30} color="black" />
@@ -53,38 +55,38 @@ export const ModalLogin: React.FC<T.ModalLoginProps> = ({ modalRef }) => {
         />
 
         <View>
-        <Controller
-          control={control}
-          name="password"
-          render={({ field: { onChange } }) => (
-            <Input
-              placeholder="Senha"
-              onChangeText={onChange}
-              errorMessage={errors.password?.message}
-              secureTextEntry={states.secureTextEntry}
-            />
-          )}
-        />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange } }) => (
+              <Input
+                placeholder="Senha"
+                onChangeText={onChange}
+                errorMessage={errors.password?.message}
+                secureTextEntry={states.secureTextEntry}
+              />
+            )}
+          />
 
-        <Pressable
-          className="absolute right-4 top-3"
-          onPress={actions.showPassword}
-        >
-          {states.secureTextEntry ? (
-            <Entypo name="eye-with-line" size={24} color="#B3B3B3" />
-          ) : (
-            <AntDesign name="eyeo" size={24} color="#B3B3B3" />
-          )}
-        </Pressable>
+          <Pressable
+            className="absolute right-4 top-3"
+            onPress={actions.showPassword}
+          >
+            {states.secureTextEntry ? (
+              <Entypo name="eye-with-line" size={24} color="#B3B3B3" />
+            ) : (
+              <AntDesign name="eyeo" size={24} color="#B3B3B3" />
+            )}
+          </Pressable>
         </View>
       </View>
 
       <Button
         className="bg-orange-default flex items-center justify-center py-4 rounded-xl mt-12 w-80"
-        onPress={handleSubmit(actions.handleSignUp)}
+        onPress={handleSubmit(actions.handleRelativeSignIng)}
       >
         <Text className="text-white-default font-bold text-xl">
-          {states.loading ? <Spinner color="white" size='sm' /> : "Continuar"}
+          {states.loading ? <Spinner color="white" size="sm" /> : "Continuar"}
         </Text>
       </Button>
       <Pressable className="mt-4" onPress={actions.forgetPassword}>

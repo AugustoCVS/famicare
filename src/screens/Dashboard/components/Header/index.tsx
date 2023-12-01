@@ -7,9 +7,9 @@ import { useDashboardHeader } from "./hook";
 import * as T from "./types";
 
 export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({
-  modalEmergencyInfoRef,
+  modalLoginRelative
 }) => {
-  const { headerActions } = useDashboardHeader({ modalEmergencyInfoRef });
+  const { headerActions, headerStates } = useDashboardHeader({ modalLoginRelative });
 
   return (
     <LinearGradient
@@ -18,15 +18,15 @@ export const DashboardHeader: React.FC<T.dashboardHeaderProps> = ({
     >
       <View className="flex flex-row items-center justify-between w-full h-10 gap-1 mt-1 gap-1">
         <Text className="text-xl text-white-default font-bold text-center">
-          Olá, Familia Santana!
+          {headerStates.relativeId ? "Olá, " + headerStates.relativeName : `Olá, ${headerStates.familyName}!`}
         </Text>
 
         <Button
           className="border border-gray-default bg-white-default w-2/5 rounded-lg flex items-center justify-center h-3/4"
-          onPress={() => console.log("teste")}
+          onPress={headerStates.relativeId ? headerActions.handleLogout : headerActions.openModalRelativeLogin}
         >
           <Text className="font-bold uppercase text-md text-orange-default">
-            Integrante
+            {headerStates.relativeId ? "Sair" : "Integrante"}
           </Text>
         </Button>
       </View>

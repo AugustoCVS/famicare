@@ -1,17 +1,17 @@
-import { RefreshControl, Text, View } from "react-native";
-import { useAppointments } from "./hook";
+import { View, Text, RefreshControl } from "react-native";
+import { useHealthHistoric } from "./hook";
 import { ScrollView, Spinner } from "native-base";
-import React from "react";
+
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 
-export const Appointments: React.FC = () => {
-  const { states, actions } = useAppointments();
+export const HealthHistoric = () => {
+  const { states, actions } = useHealthHistoric();
 
   function renderRefreshControl() {
     return (
       <RefreshControl
         refreshing={states.refreshLoading}
-        onRefresh={actions.handleRefreshAppointments}
+        onRefresh={actions.refreshHealthHistoric}
         tintColor={"#F6931F"}
       />
     );
@@ -23,63 +23,46 @@ export const Appointments: React.FC = () => {
         <Text className="text-xl text-gray-default font-bold text-center">
           {`Olá, ${states.relativeName}!`}
         </Text>
-        <Text>Aqui você pode acompanhar suas consultas realizadas!</Text>
+        <Text>Aqui você pode acompanhar seu histórico médico!</Text>
       </View>
     );
   };
 
-  const renderAppointments = () => {
+  const renderHealthHistoric = () => {
     return (
       <View className="w-full p-4 h-full">
-        {states.appointments.map((appointments) => {
+        {states.healthHistoric.map((historic) => {
           return (
             <View
-              className="flex flex-col items-start justify-between w-full gap-1 mt-4 border border-gray-200 rounded p-4"
-              key={appointments.id}
+              className="flex flex-col items-start justify-between w-full h-40 gap-1 mt-4 border border-gray-200 rounded p-4"
+              key={historic.id}
             >
               <View className="flex flex-row items-center border-b gap-2 border-b-gray-200 w-full">
                 <FontAwesome5 name="book-medical" size={20} color="orange" />
                 <Text className="text-xl text-gray-default font-bold">
-                  Motivo: {' '}
-                  {appointments.diagnostic}
+                  {historic.diagnostic}
                 </Text>
               </View>
-              <Text className="p-1">
+              <Text>
                 <Text className="font-bold">
                   <Ionicons name="medical-sharp" size={12} color="#F6931F" />
                   Tratamento:
                 </Text>{" "}
-                {appointments.treatment}
+                {historic.treatment}
               </Text>
-              <Text className="p-1">
+              <Text>
                 <Text className="font-bold">
                   <Ionicons name="medical-sharp" size={12} color="#F6931F" />
-                  Medicamentos:
+                  Alergia:
                 </Text>{" "}
-                {appointments.medicines}
+                {historic.allergies}
               </Text>
-              <Text className="p-1">
+              <Text>
                 <Text className="font-bold">
                   <Ionicons name="medical-sharp" size={12} color="#F6931F" />
                   Resultado:
                 </Text>{" "}
-                {appointments.results}
-              </Text>
-
-              <Text className="p-1">
-                <Text className="font-bold">
-                  <Ionicons name="medical-sharp" size={12} color="#F6931F" />
-                  Observações:
-                </Text>{" "}
-                {appointments.observations}
-              </Text>
-
-              <Text className="p-1">
-                <Text className="font-bold">
-                  <Ionicons name="medical-sharp" size={12} color="#F6931F" />
-                  Doutor(a):
-                </Text>{" "}
-                {appointments.doctor}
+                {historic.results}
               </Text>
             </View>
           );
@@ -101,7 +84,7 @@ export const Appointments: React.FC = () => {
           <Spinner color={"#F6931F"} />
         </View>
       ) : (
-        <>{renderAppointments()}</>
+        <>{renderHealthHistoric()}</>
       )}
     </ScrollView>
   );

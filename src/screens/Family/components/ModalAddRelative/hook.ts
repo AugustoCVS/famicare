@@ -3,11 +3,9 @@ import { useToast } from "native-base";
 
 import * as T from "./types";
 import * as U from "./utils";
-import { FIREBASE_AUTH } from "auth/FirebaseConfig";
 import { AuthServices } from "src/services/auth";
 
-export const useModalRegister = ({modalRef}: T.ModalRegisterProps) => {
-  const auth = FIREBASE_AUTH;
+export const useModalAddRelative = ({modalRef, token, familyId}: T.ModalAddRelativeProps) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -20,20 +18,23 @@ export const useModalRegister = ({modalRef}: T.ModalRegisterProps) => {
     });
   };
 
-  const handleSignUp = async (FormData: T.useRegisterProps): Promise<void> => {
+  const handleAddRelative = async (FormData: T.useRegisterRelativeProps): Promise<void> => {
     try {
       setLoading(true);
-      await U.signUpSchema.validate(FormData, { abortEarly: false });
-      const response = await AuthServices.registerFamily({
+      await U.addRelativeSchema.validate(FormData, { abortEarly: false });
+      const response = await AuthServices.registerRelative({
         name: FormData.name,
+        cpf: FormData.cpf,
         email: FormData.email,
         password: FormData.password,
         confirm_password: FormData.confirm_password,
+        id: familyId,
+        token: token,
       });
-      showToast({title: "Usuário cadastrado com sucesso!", error: false})
+      showToast({title: "Familiar cadastrado com sucesso!", error: false})
       modalRef.current?.close();
     } catch (error) {
-      showToast({title: "Erro ao cadastrar o usuário!", error: true});
+      showToast({title: "Erro ao cadastrar o familiar!", error: true});
     } finally {
       setLoading(false);
     }
@@ -45,7 +46,7 @@ export const useModalRegister = ({modalRef}: T.ModalRegisterProps) => {
       loading,
     },
     actions: {
-      handleSignUp,
+      handleAddRelative,
     },
   };
 };

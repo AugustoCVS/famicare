@@ -7,20 +7,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal } from "src/components/Modais/Gerenic";
 import { Input } from "src/components/Input";
 import { Button } from "src/components/Button";
-import { useModalRegister } from "./hook";
+import { useModalAddRelative } from "./hook";
 
 import * as T from "./types";
 import * as U from "./utils";
 import { Spinner } from "native-base";
 
-export const ModalRegister: React.FC<T.ModalRegisterProps> = ({ modalRef }) => {
-  const { states, actions } = useModalRegister({modalRef});
+export const ModalAddRelative: React.FC<T.ModalAddRelativeProps> = ({ modalRef, token, familyId }) => {
+  const { states, actions } = useModalAddRelative({modalRef, token, familyId});
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<T.useRegisterProps>({
-    resolver: yupResolver(U.signUpSchema)
+  } = useForm<T.useRegisterRelativeProps>({
+    resolver: yupResolver(U.addRelativeSchema)
   });
 
   const onClose = (): void => {
@@ -32,7 +32,7 @@ export const ModalRegister: React.FC<T.ModalRegisterProps> = ({ modalRef }) => {
       modalizeRef={modalRef}
       HeaderComponent={
         <View className="flex justify-center items-center mt-4">
-          <Text className="text-gray-default font-bold text-3xl">Cadastro</Text>
+          <Text className="text-gray-default font-bold text-3xl">Cadastro do Familiar</Text>
 
           <Pressable onPress={onClose} className="absolute right-4 top-1">
             <AntDesign name="close" size={30} color="black" />
@@ -49,7 +49,7 @@ export const ModalRegister: React.FC<T.ModalRegisterProps> = ({ modalRef }) => {
           <Controller
             key={item.name}
             control={control}
-            name={item.name as keyof T.useRegisterProps}
+            name={item.name as keyof T.useRegisterRelativeProps}
             render={({ field: { onChange } }) => (
               <>
                 <Input
@@ -70,7 +70,7 @@ export const ModalRegister: React.FC<T.ModalRegisterProps> = ({ modalRef }) => {
       </ScrollView>
       <Button
         className="bg-orange-default flex items-center justify-center py-4 rounded-xl mt-12 mb-6 w-80"
-        onPress={handleSubmit(actions.handleSignUp)}
+        onPress={handleSubmit(actions.handleAddRelative)}
       >
         <Text className="text-white-default font-bold text-xl">
           {states.loading ? <Spinner color="white" size='sm' /> : "Cadastrar"}
