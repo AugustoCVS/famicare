@@ -75,6 +75,7 @@ export const HealthHistoric = () => {
     <ScrollView
       className="flex flex-col h-full bg-white-default"
       refreshControl={renderRefreshControl()}
+      showsVerticalScrollIndicator={false}
     >
       <View className="w-full h-20 p-8">{renderHeader()}</View>
 
