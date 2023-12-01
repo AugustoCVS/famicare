@@ -63,7 +63,7 @@ export const Dashboard: React.FC = () => {
             <CTA
               label="Exames"
               icon={<MaterialIcons name="science" size={28} color="#F6931F" />}
-              onPress={actions.test}
+              onPress={actions.navigateToExams}
             />
 
             <CTA

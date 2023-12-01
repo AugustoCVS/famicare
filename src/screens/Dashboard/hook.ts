@@ -61,6 +61,18 @@ export const useDashboard = () => {
     }
   }
 
+  const navigateToExams = () => {
+    if(relativeId) {
+      navigation.navigate('Exams');
+    } else {
+      handleOpenModalLoginRelative();
+      showToast({
+        title: 'Você precisa estar logado para acessar o histórico de saúde',
+        error: true,
+      })
+    }
+  }
+
   const handleOpenModalEmergencyInfo = () => {
     modalEmergencyInfoRef.current?.open();
   }
@@ -75,7 +87,8 @@ export const useDashboard = () => {
       handleOpenModalEmergencyInfo,
       navigateToHealthHistoric,
       handleOpenModalLoginRelative,
-      navigateToAppointments
+      navigateToAppointments,
+      navigateToExams,
     },
   };
 };
