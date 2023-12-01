@@ -8,6 +8,6 @@ export interface ExamsResponse {
     type: string;
     date: string;
     result: string;
-    observation: string;
+    observations: string;
     doctor: string;
 }
