@@ -8,6 +8,7 @@ import Home from "../screens/Home";
 import TabRoutes from "./tab.routes";
 import { HealthHistoric } from "src/screens/HealthHistoric";
 import { Appointments } from "src/screens/Appointments";
+import { Exams } from "src/screens/Exams";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export type StackNavigation = {
   TabDashboard: undefined;
   HealthHistoric: undefined;
   Appointments: undefined;
+  Exams: undefined;
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
@@ -61,6 +63,16 @@ export default function StackRoutes() {
           headerShown: true,
         }}
         component={Appointments}
+      />
+
+      <Stack.Screen
+        name="Exams"
+        options={{
+          title: "Exames",
+          headerTransparent: false,
+          headerShown: true,
+        }}
+        component={Exams}
       />
     </Stack.Navigator>
   );
