@@ -15,7 +15,7 @@ export const useExams = () => {
     try {
       setLoading(true);
 
-      const response = await ExamsServices.fetchHealthHistoric({
+      const response = await ExamsServices.fetchExams({
         relativeId: relativeId,
         token: token,
       })
