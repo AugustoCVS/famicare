@@ -56,3 +56,25 @@ export interface LoginRelativeResponse {
     cpf: string;
     email: string;
 }
+
+export interface FetchRelativeRequest {
+    familyId: string;
+    relativeId: string;
+    token: string;
+}
+
+export interface FetchRelativeByIdResponse {
+    id: string;
+    name: string;
+    email: string;
+    cpf: string;
+}
+
+export interface UpdateRelativeRequest {
+    familyId: string;
+    relativeId: string;
+    token: string;
+    name: string;
+    email: string;
+    cpf: string;
+}
